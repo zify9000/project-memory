@@ -1,6 +1,6 @@
 # project-memory
 
-面向 AI agent 的项目记忆文档结构（Kimi Code CLI Skill）：为项目搭建一套对抗上下文重置的长期记忆体系，初始化时拉出框架，开发过程中由 agent 伴随维护。
+面向 AI agent 的项目记忆文档结构：为项目搭建一套对抗上下文重置的长期记忆体系，初始化时拉出框架，开发过程中由 agent 伴随维护。
 
 ## 解决的问题
 
@@ -21,21 +21,6 @@ AGENTS.md        # "项目记忆体系"章节，由 sync 脚本机械写入
 
 核心原则：**稳定的、代码推不出来的信息才值得写成文档；代码能回答的问题，让 agent 去问代码。**
 
-## 安装
-
-把整个目录克隆为 Kimi Code CLI 的用户级 skill：
-
-```bash
-git clone https://github.com/zify9000/project-memory.git ~/.kimi-code/skills/project-memory
-```
-
-新开一个会话后生效。
-
-## 使用
-
-- 手动调用：`/skill:project-memory`
-- 自动触发：初始化新项目、为存量项目补建文档结构、开发中出现架构决策需要沉淀、要求更新或体检项目记忆文档时
-
 ## 仓库结构
 
 ```
@@ -44,19 +29,3 @@ references/agents-chapter.md    # AGENTS.md 章节的标准副本（唯一事实
 scripts/sync.sh                 # 章节安装/同步/校验脚本（Linux / macOS）
 scripts/sync.ps1                # 同上，Windows PowerShell 版
 ```
-
-### sync 脚本
-
-AGENTS.md 的"项目记忆体系"章节是写死的标准件，不手工复制，由脚本机械执行：
-
-```bash
-# Linux / macOS
-bash scripts/sync.sh <项目根目录>          # 安装或同步（幂等）
-bash scripts/sync.sh --check <项目根目录>  # 仅校验；缺失/被篡改/过期时退出码 1
-
-# Windows PowerShell
-powershell -File scripts/sync.ps1 <项目根目录>
-powershell -File scripts/sync.ps1 -Check <项目根目录>
-```
-
-修改规则 = 改 `references/agents-chapter.md` 并升级版本号，然后对各个项目重跑 sync 脚本。
